@@ -15,6 +15,10 @@
                             @if (session('added'))
                                 <p style="color: green;">{{session('added')}}</p>
                             @endif
+
+                            @if (session('deleted'))
+                                <p style="color: red;">{{session('deleted')}}</p>
+                            @endif
                             <form action="{{ route('store') }}" method="POST" id="taskForm">
                                 @csrf
                             <input type="text" class="form-control" placeholder="Add a new task..." name="title">
@@ -32,7 +36,10 @@
                         @foreach ($tasks as $task )
                             <li class="list-group-item d-flex justify-content-between align-items-center">
                                 {{ $task->title }}
-                            
+                                <form action="{{ route('task.destroy', $task->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this task?')">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="btn btn-danger btn-sm">🗑️</button>
                         @endforeach
                     </ul>
                 </div>

@@ -38,4 +38,9 @@ class TaskController extends Controller
         return view('home', compact('tasks'));
     }
 
+    public function destroy(Task $task){
+        $task->delete();
+        return redirect()->back()->with('deleted', 'Task deleted successfully.');
+    }
+
 }

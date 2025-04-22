@@ -33,3 +33,5 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('ho
 Route::post('/task', [TaskController::class, 'store'])->name('store');
 
 Route::get('/', [TaskController::class, 'index'])->name('home');
+
+Route::delete('/task/{task}', [TaskController::class, 'destroy'])->name('task.destroy');
