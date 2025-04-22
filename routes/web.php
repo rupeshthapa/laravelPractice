@@ -27,6 +27,6 @@ use function Laravel\Prompts\form;
 //     return view('hello', ['name'=> $name]);
 // });
 
-Route::get('/', function(){
-    return view('login');
-});
+Auth::routes();
+
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
