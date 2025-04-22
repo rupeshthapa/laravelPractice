@@ -34,4 +34,7 @@ Route::post('/task', [TaskController::class, 'store'])->name('store');
 
 Route::get('/', [TaskController::class, 'index'])->name('home');
 
+Route::get('/task/{task}/edit', [TaskController::class, 'edit'])->name('task.edit');
+Route::put('/task/{task}', [TaskController::class, 'update'])->name('task.update');
+
 Route::delete('/task/{task}', [TaskController::class, 'destroy'])->name('task.destroy');

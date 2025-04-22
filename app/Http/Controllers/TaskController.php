@@ -38,6 +38,23 @@ class TaskController extends Controller
         return view('home', compact('tasks'));
     }
 
+
+    public function edit(Task $task){
+      
+        return view('tasks.edit', compact('task'));
+    }
+
+    public function update(Request $request, Task $task){
+        $request->validate([
+            'title' => 'required|string|max:255',
+        ]);
+
+        $task->title = $request->title;
+        $task->save();
+
+        return redirect()->route('home')->with('updated', 'Task updated successfully.');
+    }
+
     public function destroy(Task $task){
         $task->delete();
         return redirect()->back()->with('deleted', 'Task deleted successfully.');

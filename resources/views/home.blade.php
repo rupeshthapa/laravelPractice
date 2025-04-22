@@ -19,6 +19,11 @@
                             @if (session('deleted'))
                                 <p style="color: red;">{{session('deleted')}}</p>
                             @endif
+
+                            @if (session('updated'))
+                                <p style="color: blue;">{{session('updated')}}</p>
+                                
+                            @endif
                             <form action="{{ route('store') }}" method="POST" id="taskForm">
                                 @csrf
                             <input type="text" class="form-control" placeholder="Add a new task..." name="title">
@@ -33,15 +38,21 @@
                     </div>
                 
                     <ul class="list-group mt-3" id="taskList">
-                        @foreach ($tasks as $task )
+                        @foreach ($tasks as $task)
                             <li class="list-group-item d-flex justify-content-between align-items-center">
                                 {{ $task->title }}
-                                <form action="{{ route('task.destroy', $task->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this task?')">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button class="btn btn-danger btn-sm">🗑️</button>
+                                <div class="btn-group" role="group">
+                                    <a href="{{ route('task.edit', $task->id) }}" class="btn btn-warning btn-sm">✏️</a>
+                                    <form action="{{ route('task.destroy', $task->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this task?')" style="display: inline;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="btn btn-danger btn-sm">🗑️</button>
+                                    </form>
+                                </div>
+                            </li>
                         @endforeach
                     </ul>
+                    
                 </div>
                 
             </div>
