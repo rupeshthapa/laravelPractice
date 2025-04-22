@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\FormController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PageController;
+use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -30,3 +30,4 @@ use function Laravel\Prompts\form;
 Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::post('/task', [TaskController::class, 'store'])->name('store');

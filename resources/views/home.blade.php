@@ -12,11 +12,20 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-9">
-                            <input type="text" class="form-control" placeholder="Add a new task..." id="taskInput">
+                            @if (session('added'))
+                                <p style="color: green;">{{session('added')}}</p>
+                            @endif
+                            <form action="{{ route('store') }}" method="POST" id="taskForm">
+                                @csrf
+                            <input type="text" class="form-control" placeholder="Add a new task..." name="title">
+                            @error('title')
+                                <p style="color: red;">{{ $message }}</p>
+                            @enderror
                         </div>
                         <div class="col-3">
                             <button class="btn btn-primary w-100" id="addTaskButton">Add Task</button>
                         </div>
+                    </form>
                     </div>
                 
                     <ul class="list-group mt-3" id="taskList">
