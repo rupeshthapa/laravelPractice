@@ -35,6 +35,7 @@ class TaskController extends Controller
 
     public function index(){
         $tasks = Task::where('user_id', Auth::id())->latest()->get();
+        // dd($tasks);
         return view('home', compact('tasks'));
     }
 
@@ -53,6 +54,13 @@ class TaskController extends Controller
         $task->save();
 
         return redirect()->route('home')->with('updated', 'Task updated successfully.');
+    }
+
+    public function toggle(Task $task){
+        $task->completed = !$task->completed;
+        $task->save();
+
+        return redirect()->route('home')->with('toggled', 'Task status changed successfully.');
     }
 
     public function destroy(Task $task){
