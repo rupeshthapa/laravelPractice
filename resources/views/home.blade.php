@@ -29,7 +29,11 @@
                     </div>
                 
                     <ul class="list-group mt-3" id="taskList">
-                        <!-- Task items will be dynamically added here -->
+                        @foreach ($tasks as $task )
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                {{ $task->title }}
+                            
+                        @endforeach
                     </ul>
                 </div>
                 

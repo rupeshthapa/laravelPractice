@@ -33,8 +33,9 @@ class TaskController extends Controller
         return redirect()->back()->with('added', 'Task created successfully.');
     }
 
-    /**
-     * Display the specified resource.
-     */
+    public function index(){
+        $tasks = Task::where('user_id', Auth::id())->latest()->get();
+        return view('home', compact('tasks'));
+    }
 
 }
